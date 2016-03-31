@@ -8,9 +8,10 @@
 
 	td{
 		border:1px solid black;
-		width: 20px;
-		height: 20px;
-		text-align: center;
+		width: 32px;
+		height: 32px;
+		background-image: url('content/img/desert1.png');	
+		background-size: cover;
 	}
 
 	table{
@@ -22,8 +23,31 @@
 		background-color:black;
 	}
 	
-	td.mine{
-		background-color: red;	
+
+	
+	td[n="1"]{
+		background-image: url('content/img/mark1.png');	
+		background-size: cover;
+	}
+	td[n="2"]{
+		background-image: url('content/img/mark2.png');	
+		background-size: cover;
+	}
+	td[n="3"]{
+		background-image: url('content/img/mark3.png');	
+		background-size: cover;
+	}
+	td[n="4"]{
+		background-image: url('content/img/mark4.png');	
+		background-size: cover;
+	}
+	td[n="5"]{
+		background-image: url('content/img/mark4.png');	
+		background-size: cover;
+	}
+		td.mine{
+		background-image: url('content/img/mark-mine.png');	
+		background-size: cover;
 	}
 
 </style>
@@ -43,10 +67,13 @@ function createField(selector){
 			$tr.append(
 				$('<td>').click(
 					function(event){
+						if(firstClick){
 						$(this).toggleClass('black');
 						generateMines($(this));
 						generateNumbers();
 						findMines($(this));
+						firstClick=false;
+						}
 					}
 				).attr('y',j).attr('x',i).attr('n',0)
 			);
@@ -67,7 +94,7 @@ function generateMines($clicked_td){
 
 		//alert($tds.size());
 		$tds.each(function() {
-			if(Math.random() < 0.1){
+			if(Math.random() < 0.2){
 				$(this).addClass('mine');
 		}
 	});
@@ -85,14 +112,13 @@ function findMines($clicked_td){
 function showNumbers($clicked_td){
 	//test
 	$('td').each(function(){
-		if($(this).attr('n') != 0){
+		if($(this).attr('n') != 0 && $(this).attr('class') != 'mine'){
 			$(this).text($(this).attr('n'));
 		}
 	});
 }
 
 function generateNumbers(){
-	if(firstClick){}
 	var $mines = $('td.mine');
 	
 	console.log('#mines: '+$mines.size());
@@ -126,7 +152,7 @@ function generateNumbers(){
 		$(this).parent().next().find('td:nth-child('+index+')').next().attr('n', n );			
 	});
 	
-	showNumbers();
+	//showNumbers();
 }
 
 window.onload = function(){
