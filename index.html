@@ -10,9 +10,14 @@
 		border:1px solid black;
 		width: 20px;
 		height: 20px;
+		text-align: center;
 	}
 
-
+	table{
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
 	td.black{
 		background-color:black;
 	}
@@ -77,8 +82,17 @@ function findMines($clicked_td){
 	
 }
 
+function showNumbers($clicked_td){
+	//test
+	$('td').each(function(){
+		if($(this).attr('n') != 0){
+			$(this).text($(this).attr('n'));
+		}
+	});
+}
 
 function generateNumbers(){
+	if(firstClick){}
 	var $mines = $('td.mine');
 	
 	console.log('#mines: '+$mines.size());
@@ -87,21 +101,23 @@ function generateNumbers(){
 		var index = $(this).index()+1;
 		var n;
 		
-		//Ez a resz ocsmany, kene valami jobb megoldas
+		//Ez a resz ocsmány, kéne valami jobb megoldás
 		
+		//kettő mellette
 		n=parseInt($(this).prev().attr('n'))+1;
 		$(this).prev().attr('n', n);
 		n=parseInt($(this).next().attr('n'))+1;
 		$(this).next().attr('n', n);
 	
-		
+		//három felette
 		n=parseInt($(this).parent().prev().find('td:nth-child('+index+')').attr('n'))+1;	
 		$(this).parent().prev().find('td:nth-child('+index+')').attr('n', n );	
 		n=parseInt($(this).parent().prev().find('td:nth-child('+index+')').prev().attr('n'))+1;	
 		$(this).parent().prev().find('td:nth-child('+index+')').prev().attr('n', n );	
 		n=parseInt($(this).parent().prev().find('td:nth-child('+index+')').next().attr('n'))+1;	
 		$(this).parent().prev().find('td:nth-child('+index+')').next().attr('n', n );	
-
+		
+		//három alatt
 		n=parseInt($(this).parent().next().find('td:nth-child('+index+')').attr('n'))+1;	
 		$(this).parent().next().find('td:nth-child('+index+')').attr('n', n );	
 		n=parseInt($(this).parent().next().find('td:nth-child('+index+')').prev().attr('n'))+1;	
@@ -109,6 +125,8 @@ function generateNumbers(){
 		n=parseInt($(this).parent().next().find('td:nth-child('+index+')').next().attr('n'))+1;	
 		$(this).parent().next().find('td:nth-child('+index+')').next().attr('n', n );			
 	});
+	
+	showNumbers();
 }
 
 window.onload = function(){
