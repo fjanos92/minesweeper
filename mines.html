@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>Minesweeper</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<style>
+
+	td{
+		border:1px solid black;
+		width: 20px;
+		height: 20px;
+	}
+
+
+	td.black{
+		background-color:black;
+	}
+	
+	td.mine{
+		background-color: red;	
+	}
+
+</style>
+
+<script>
+var firstClick = true;
+var currentColor = 'black';
+function createField(selector){
+	var i, j;
+	var $table = $('<table>');
+	
+	for(i=0;i<10;i++)
+    {
+		var $tr = $('<tr>');
+		for(j=0;j<10;j++)
+        {
+			$tr.append(
+				$('<td>').click(
+					function(event){
+						$(this).toggleClass('black');
+						generateMines($(this));
+						generateNumbers();
+						findMines($(this));
+					}
+				).attr('y',j).attr('x',i).attr('n',0)
+			);
+		}
+		$table.append($tr);
+	}
+	
+	$(selector).append($table);
+}
+
+function generateMines($clicked_td){
+	var x= $clicked_td.attr('x');
+	var y= $clicked_td.attr('y');
+	
+	if(firstClick){
+		firstClick = false;
+		var $tds = $('td[x!='+x+'], td[y!='+y+']');
+
+		//alert($tds.size());
+		$tds.each(function() {
+			if(Math.random() < 0.1){
+				$(this).addClass('mine');
+		}
+	});
+	}
+}
+
+function placeFlag($clicked_td){
+	
+}
+
+function findMines($clicked_td){
+	
+}
+
+
+function generateNumbers(){
+	var $mines = $('td.mine');
+	
+	console.log('#mines: '+$mines.size());
+	
+	$mines.each(function(){
+		var index = $(this).index()+1;
+		var n;
+		
+		//Ez a resz ocsmany, kene valami jobb megoldas
+		
+		n=parseInt($(this).prev().attr('n'))+1;
+		$(this).prev().attr('n', n);
+		n=parseInt($(this).next().attr('n'))+1;
+		$(this).next().attr('n', n);
+	
+		
+		n=parseInt($(this).parent().prev().find('td:nth-child('+index+')').attr('n'))+1;	
+		$(this).parent().prev().find('td:nth-child('+index+')').attr('n', n );	
+		n=parseInt($(this).parent().prev().find('td:nth-child('+index+')').prev().attr('n'))+1;	
+		$(this).parent().prev().find('td:nth-child('+index+')').prev().attr('n', n );	
+		n=parseInt($(this).parent().prev().find('td:nth-child('+index+')').next().attr('n'))+1;	
+		$(this).parent().prev().find('td:nth-child('+index+')').next().attr('n', n );	
+
+		n=parseInt($(this).parent().next().find('td:nth-child('+index+')').attr('n'))+1;	
+		$(this).parent().next().find('td:nth-child('+index+')').attr('n', n );	
+		n=parseInt($(this).parent().next().find('td:nth-child('+index+')').prev().attr('n'))+1;	
+		$(this).parent().next().find('td:nth-child('+index+')').prev().attr('n', n );	
+		n=parseInt($(this).parent().next().find('td:nth-child('+index+')').next().attr('n'))+1;	
+		$(this).parent().next().find('td:nth-child('+index+')').next().attr('n', n );			
+	});
+}
+
+window.onload = function(){
+	createField('#minefield');
+}
+
+</script>
+
+
+</head>
+<body>
+	<div id="minefield"></div>
+	
+	</div>
+  
+</body>
+
+</html>
