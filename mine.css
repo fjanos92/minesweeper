@@ -21,51 +21,56 @@ table {
     margin-right: auto;
 }
 
-td.black {
-    background-color: black;
+
+
+td.grass{
+	background-image: url('img/grass.png');
 }
 
-td[n="1"] {
+td[n="1"].visible{
     background-image: url('img/mark1.png');
     background-size: cover;
 }
 
-td[n="2"] {
+td[n="2"].visible{
     background-image: url('img/mark2.png');
     background-size: cover;
 }
 
-td[n="3"] {
+td[n="3"].visible {
     background-image: url('img/mark3.png');
     background-size: cover;
 }
 
-td[n="4"] {
+td[n="4"].visible {
     background-image: url('img/mark4.png');
     background-size: cover;
 }
 
-td[n="5"] {
+td[n="5"].visible {
     background-image: url('img/mark5.png');
     background-size: cover;
 }
 
-td[n="6"] {
+td[n="6"].visible{
     background-image: url('img/mark6.png');
     background-size: cover;
 }
 
-td[n="7"] {
+td[n="7"].visible{
     background-image: url('img/mark7.png');
     background-size: cover;
 }
 
-td[n="8"] {
+td[n="8"].visible {
     background-image: url('img/mark8.png');
     background-size: cover;
 }
 
-td.c4 {
+td.c4.visible {
     background-image: url('img/mark-mine.png');
     background-size: cover;
+}
+td.explode{
+	background-image: url('img/explode.gif');
 }

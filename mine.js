@@ -1,5 +1,4 @@
 var firstClick = true;
-var currentColor = 'black';
 
 function createField(selector) {
     var i, j;
@@ -12,11 +11,15 @@ function createField(selector) {
                 $('<td>').click(function() {
                     if (firstClick) {
                         firstClick = false;
-                        $(this).toggleClass('black');
+                        //$(this).toggleClass('black');
                         generateMines($(this));
                         generateNumbers();
-                        findMines($(this));
+                        //findMines($(this));
                     }
+					
+						showNumbers($(this));
+					
+					
                 }).attr('y', j).attr('x', i).attr('n', 0));
         }
         $table.append($tr);
@@ -37,20 +40,49 @@ function generateMines($clicked_td) {
 }
 
 function placeFlag($clicked_td) {
-
+	$clicked_td.addClass('flag')
 }
 
-function findMines($clicked_td) {
+function showAllMines() {
+	$('.c4').each(function(){
+		$(this).addClass('visible');
+	});
+}
 
+function gameOver($clicked_td){
+	$clicked_td.removeClass('c4');
+	$clicked_td.addClass('explode');
+	showAllMines();
+	alert('faggit');
 }
 
 function showNumbers($clicked_td) {
-    //test
-    $('td').each(function() {
-        if ($(this).attr('n') != 0 && $(this).attr('class') != 'mine') {
-            $(this).text($(this).attr('n'));
+    var done = false;
+	var index = $clicked_td.index();
+	
+	if($clicked_td.attr('n') == 0 && !$clicked_td.hasClass('grass')){
+		$clicked_td.addClass('grass');
+		findGrass($clicked_td);
+	}
+	else if(parseInt($clicked_td.attr('n')) > 0 && !$clicked_td.hasClass('c4')){
+		$clicked_td.addClass('visible');
+	}
+	else if($clicked_td.hasClass('c4')){
+		gameOver($clicked_td);
+	}
+}
+
+function findGrass($current){
+	var x = parseInt($current.attr('x'));
+    var y = parseInt($current.attr('y'));
+    var n;
+
+    for (var i = x-1; i <= x+1; i++) {
+        for (var j = y-1; j <= y+1; j++) {
+            var $this = $('td[x=\"' + i + '\"][y=\"' + j + '\"]');
+			showNumbers($this);
         }
-    });
+    }
 }
 
 function generateNumbers() {
