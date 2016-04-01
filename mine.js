@@ -1,5 +1,6 @@
 var firstClick = true;
 var currentColor = 'black';
+
 function createField(selector) {
     var i, j;
     var $table = $('<table>');
@@ -8,40 +9,31 @@ function createField(selector) {
         var $tr = $('<tr>');
         for (j = 0; j < 10; j++) {
             $tr.append(
-                $('<td>').click(
-                    function (event) {
-                        if (firstClick) {
-                            $(this).toggleClass('black');
-                            generateMines($(this));
-                            generateNumbers();
-                            findMines($(this));
-                            firstClick = false;
-                        }
+                $('<td>').click(function() {
+                    if (firstClick) {
+                        firstClick = false;
+                        $(this).toggleClass('black');
+                        generateMines($(this));
+                        generateNumbers();
+                        findMines($(this));
                     }
-                ).attr('y', j).attr('x', i).attr('n', 0)
-            );
+                }).attr('y', j).attr('x', i).attr('n', 0));
         }
         $table.append($tr);
     }
-
     $(selector).append($table);
 }
 
 function generateMines($clicked_td) {
     var x = $clicked_td.attr('x');
     var y = $clicked_td.attr('y');
+    var $tds = $('td[x!=' + x + '], td[y!=' + y + ']');
 
-    if (firstClick) {
-        firstClick = false;
-        var $tds = $('td[x!=' + x + '], td[y!=' + y + ']');
-
-        //alert($tds.size());
-        $tds.each(function () {
-            if (Math.random() < 0.2) {
-                $(this).addClass('mine');
-            }
-        });
-    }
+    $tds.each(function() {
+        if (Math.random() < 0.2) {
+            $(this).addClass('c4');
+        }
+    });
 }
 
 function placeFlag($clicked_td) {
@@ -54,7 +46,7 @@ function findMines($clicked_td) {
 
 function showNumbers($clicked_td) {
     //test
-    $('td').each(function () {
+    $('td').each(function() {
         if ($(this).attr('n') != 0 && $(this).attr('class') != 'mine') {
             $(this).text($(this).attr('n'));
         }
@@ -62,43 +54,27 @@ function showNumbers($clicked_td) {
 }
 
 function generateNumbers() {
-    var $mines = $('td.mine');
+    var $mines = $('.c4');
 
     console.log('#mines: ' + $mines.size());
 
-    $mines.each(function () {
-        var index = $(this).index() + 1;
+    $mines.each(function() {
+        var x = parseInt($(this).attr('x'));
+        var y = parseInt($(this).attr('y'));
         var n;
 
-        //Ez a resz ocsmány, kéne valami jobb megoldás
-
-        //kettő mellette
-        n = parseInt($(this).prev().attr('n')) + 1;
-        $(this).prev().attr('n', n);
-        n = parseInt($(this).next().attr('n')) + 1;
-        $(this).next().attr('n', n);
-
-        //három felette
-        n = parseInt($(this).parent().prev().find('td:nth-child(' + index + ')').attr('n')) + 1;
-        $(this).parent().prev().find('td:nth-child(' + index + ')').attr('n', n);
-        n = parseInt($(this).parent().prev().find('td:nth-child(' + index + ')').prev().attr('n')) + 1;
-        $(this).parent().prev().find('td:nth-child(' + index + ')').prev().attr('n', n);
-        n = parseInt($(this).parent().prev().find('td:nth-child(' + index + ')').next().attr('n')) + 1;
-        $(this).parent().prev().find('td:nth-child(' + index + ')').next().attr('n', n);
-
-        //három alatt
-        n = parseInt($(this).parent().next().find('td:nth-child(' + index + ')').attr('n')) + 1;
-        $(this).parent().next().find('td:nth-child(' + index + ')').attr('n', n);
-        n = parseInt($(this).parent().next().find('td:nth-child(' + index + ')').prev().attr('n')) + 1;
-        $(this).parent().next().find('td:nth-child(' + index + ')').prev().attr('n', n);
-        n = parseInt($(this).parent().next().find('td:nth-child(' + index + ')').next().attr('n')) + 1;
-        $(this).parent().next().find('td:nth-child(' + index + ')').next().attr('n', n);
+        for (var i = x-1; i <= x+1; i++) {
+            for (var j = y-1; j <= y+1; j++) {
+                var $this = $('td[x=\"' + i + '\"][y=\"' + j + '\"]');
+                n = parseInt($this.attr('n')) + 1;
+                $this.attr('n', n);
+            }
+        }
     });
 
     //showNumbers();
-
 }
 
-window.onload = function () {
+$(document).ready(function() {
     createField('#minefield');
-}
+});

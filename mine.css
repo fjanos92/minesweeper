@@ -1,8 +1,18 @@
+* {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+table {
+    border-collapse: collapse;
+}
+
 td {
-    border: 1px solid black;
+    border: 1px solid #826A4A;
     width: 32px;
     height: 32px;
-    background-image: url('img/desert1.png');
+    background: #C09D6C url('img/desert1.png');
     background-size: cover;
 }
 
@@ -36,11 +46,26 @@ td[n="4"] {
 }
 
 td[n="5"] {
-    background-image: url('img/mark4.png');
+    background-image: url('img/mark5.png');
     background-size: cover;
 }
 
-td.mine {
+td[n="6"] {
+    background-image: url('img/mark6.png');
+    background-size: cover;
+}
+
+td[n="7"] {
+    background-image: url('img/mark7.png');
+    background-size: cover;
+}
+
+td[n="8"] {
+    background-image: url('img/mark8.png');
+    background-size: cover;
+}
+
+td.c4 {
     background-image: url('img/mark-mine.png');
     background-size: cover;
 }
