@@ -1,4 +1,5 @@
 var firstClick = true;
+var over = false;
 
 function createField(selector) {
     var i, j;
@@ -17,8 +18,9 @@ function createField(selector) {
                         //findMines($(this));
                     }
 					
+					if(!over){
 						showNumbers($(this));
-					
+					}
 					
                 }).attr('y', j).attr('x', i).attr('n', 0));
         }
@@ -54,6 +56,7 @@ function gameOver($clicked_td){
 	$clicked_td.addClass('explode');
 	showAllMines();
 	alert('faggit');
+	over = true;
 }
 
 function showNumbers($clicked_td) {
@@ -75,7 +78,6 @@ function showNumbers($clicked_td) {
 function findGrass($current){
 	var x = parseInt($current.attr('x'));
     var y = parseInt($current.attr('y'));
-    var n;
 
     for (var i = x-1; i <= x+1; i++) {
         for (var j = y-1; j <= y+1; j++) {
@@ -103,8 +105,6 @@ function generateNumbers() {
             }
         }
     });
-
-    //showNumbers();
 }
 
 $(document).ready(function() {

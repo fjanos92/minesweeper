@@ -68,7 +68,7 @@ td[n="8"].visible {
 }
 
 td.c4.visible {
-    background-image: url('img/mark-mine.png');
+    background-image: url('img/mine.png');
     background-size: cover;
 }
 td.explode{
