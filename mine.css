@@ -1,0 +1,46 @@
+td {
+    border: 1px solid black;
+    width: 32px;
+    height: 32px;
+    background-image: url('img/desert1.png');
+    background-size: cover;
+}
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+td.black {
+    background-color: black;
+}
+
+td[n="1"] {
+    background-image: url('img/mark1.png');
+    background-size: cover;
+}
+
+td[n="2"] {
+    background-image: url('img/mark2.png');
+    background-size: cover;
+}
+
+td[n="3"] {
+    background-image: url('img/mark3.png');
+    background-size: cover;
+}
+
+td[n="4"] {
+    background-image: url('img/mark4.png');
+    background-size: cover;
+}
+
+td[n="5"] {
+    background-image: url('img/mark4.png');
+    background-size: cover;
+}
+
+td.mine {
+    background-image: url('img/mark-mine.png');
+    background-size: cover;
+}
