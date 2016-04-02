@@ -74,7 +74,7 @@ function generateNumbers() {
 function placeFlag($clicked_td) {
     $clicked_td.addClass('flag');
 
-    if ($('td.c4, :not(td.flag)').size() == 0) {
+    if ($('td.c4:not(.flag)').size() == 0) {
         gameWon();
     }
 }
