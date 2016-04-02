@@ -8,21 +8,20 @@ function createField(selector) {
     for (i = 0; i < 10; i++) {
         var $tr = $('<tr>');
         for (j = 0; j < 10; j++) {
+			var rand = Math.floor(Math.random() * (5 - 1)) + 1;
             $tr.append(
                 $('<td>').click(function() {
                     if (firstClick) {
                         firstClick = false;
-                        //$(this).toggleClass('black');
                         generateMines($(this));
                         generateNumbers();
-                        //findMines($(this));
                     }
 					
 					if(!over){
 						showNumbers($(this));
 					}
 					
-                }).attr('y', j).attr('x', i).attr('n', 0));
+                }).attr('y', j).attr('x', i).attr('n', 0).attr('bg', rand));
         }
         $table.append($tr);
     }
@@ -42,8 +41,13 @@ function generateMines($clicked_td) {
 }
 
 function placeFlag($clicked_td) {
-	$clicked_td.addClass('flag')
+	$clicked_td.addClass('flag');
+	
+	if($('td.c4, :not(td.flag)').size() == 0){
+		gameWon();
+	}
 }
+
 
 function showAllMines() {
 	$('.c4').each(function(){
@@ -57,6 +61,10 @@ function gameOver($clicked_td){
 	showAllMines();
 	alert('faggit');
 	over = true;
+}
+
+function gameWon(){
+	
 }
 
 function showNumbers($clicked_td) {

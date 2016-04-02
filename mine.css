@@ -23,9 +23,7 @@ table {
 
 
 
-td.grass{
-	background-image: url('img/grass.png');
-}
+
 
 td[n="1"].visible{
     background-image: url('img/mark1.png');
@@ -67,10 +65,30 @@ td[n="8"].visible {
     background-size: cover;
 }
 
+td[bg="1"]{
+	background-image: url('img/desert1.png');
+}
+td[bg="2"]{
+	background-image: url('img/desert2.png');
+}
+td[bg="3"]{
+	background-image: url('img/desert3.png');
+}
+td[bg="4"]{
+	background-image: url('img/desert4.png');
+}
+td[bg="5"]{
+	background-image: url('img/desert5.png');
+}
+
 td.c4.visible {
     background-image: url('img/mine.png');
     background-size: cover;
 }
 td.explode{
 	background-image: url('img/explode.gif');
+}
+
+td.grass{
+	background-image: url('img/grass.png');
 }
