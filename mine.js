@@ -25,7 +25,9 @@ function createField(selector) {
                             break;
                         case 3:
                         default:
-                            placeFlag($(this));
+                            if(!firstClick && !over) {
+                                placeFlag($(this));
+                            }
                             break;
                     }
                 }).on("contextmenu", function () {
