@@ -17,11 +17,11 @@ td {
     background-size: cover;
 }
 
-td[n="1"].visible{
+td[n="1"].visible {
     background-image: url('img/mark1.png');
     background-size: cover;
 }
-td[n="2"].visible{
+td[n="2"].visible {
     background-image: url('img/mark2.png');
     background-size: cover;
 }
@@ -37,11 +37,11 @@ td[n="5"].visible {
     background-image: url('img/mark5.png');
     background-size: cover;
 }
-td[n="6"].visible{
+td[n="6"].visible {
     background-image: url('img/mark6.png');
     background-size: cover;
 }
-td[n="7"].visible{
+td[n="7"].visible {
     background-image: url('img/mark7.png');
     background-size: cover;
 }
@@ -50,24 +50,23 @@ td[n="8"].visible {
     background-size: cover;
 }
 
-td[bg="1"]{
+td[bg="1"] {
 	background-image: url('img/desert1.png');
 }
-td[bg="2"]{
+td[bg="2"] {
 	background-image: url('img/desert2.png');
 }
-td[bg="3"]{
+td[bg="3"] {
 	background-image: url('img/desert3.png');
 }
-td[bg="4"]{
+td[bg="4"] {
 	background-image: url('img/desert4.png');
 }
-td[bg="5"]{
+td[bg="5"] {
 	background-image: url('img/desert5.png');
 }
 
-/*td.c4.visible*/
-td.c4 {
+td.c4.visible {
     background-image: url('img/mine.png');
     background-size: cover;
 }
@@ -82,5 +81,4 @@ td.grass {
 
 td.flag {
     background-image: url("img/mark-mine.png");
-
 }

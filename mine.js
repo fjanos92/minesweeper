@@ -10,7 +10,7 @@ function createField(selector) {
         for (j = 0; j < 10; j++) {
             var rand = Math.floor(Math.random() * (5 - 1)) + 1;
             $tr.append(
-                $('<td>').mousedown(function (e) {
+                $('<td>').mousedown(function(e) {
                     switch (e.which) {
                         case 1:
                             if (firstClick) {
@@ -24,7 +24,6 @@ function createField(selector) {
                             }
                             break;
                         case 3:
-                        default:
                             if(!firstClick && !over) {
                                 placeFlag($(this));
                             }
@@ -44,7 +43,7 @@ function generateMines($clicked_td) {
     var y = $clicked_td.attr('y');
     var $tds = $('td[x!=' + x + '], td[y!=' + y + ']');
 
-    $tds.each(function () {
+    $tds.each(function() {
         if (Math.random() < 0.2) {
             $(this).addClass('c4');
         }
@@ -54,9 +53,7 @@ function generateMines($clicked_td) {
 function generateNumbers() {
     var $mines = $('.c4');
 
-    //console.log('#mines: ' + $mines.size());
-
-    $mines.each(function () {
+    $mines.each(function() {
         var x = parseInt($(this).attr('x'));
         var y = parseInt($(this).attr('y'));
         var n;
@@ -84,12 +81,10 @@ function placeFlag($clicked_td) {
 
 function gameWon() {
     alert('You won!');
+    over = true;
 }
 
 function showNumbers($clicked_td) {
-    //var done = false;
-    //var index = $clicked_td.index();
-
     if ($clicked_td.attr('n') == 0 && !$clicked_td.hasClass('grass')) {
         $clicked_td.addClass('grass');
         findGrass($clicked_td);
@@ -123,12 +118,11 @@ function gameOver($clicked_td) {
 }
 
 function showAllMines() {
-    $('.c4').each(function () {
+    $('.c4').each(function() {
         $(this).addClass('visible');
     });
 }
 
-
-$(document).ready(function () {
+$(document).ready(function() {
     createField('#minefield');
 });
