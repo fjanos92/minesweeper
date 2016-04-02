@@ -72,9 +72,12 @@ function generateNumbers() {
 }
 
 function placeFlag($clicked_td) {
-    $clicked_td.addClass('flag');
-
-    if ($('td.c4:not(.flag)').size() == 0) {
+    $clicked_td.toggleClass('flag');
+	var minesLeft = $('td.c4:not(.flag)').size();
+	
+	console.log('mines left: '+minesLeft);
+	
+    if (minesLeft == 0) {
         gameWon();
     }
 }
