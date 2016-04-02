@@ -74,10 +74,10 @@ function generateNumbers() {
 function placeFlag($clicked_td) {
     $clicked_td.toggleClass('flag');
 	var minesLeft = $('td.c4:not(.flag)').size();
-	
 	console.log('mines left: '+minesLeft);
 	
-    if (minesLeft == 0) {
+	
+    if (minesLeft == 0 && $('td.flag:not(.c4)').size() == 0) {
         gameWon();
     }
 }
